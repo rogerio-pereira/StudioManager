@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         
         if(env('local') != 'production') {
             $this->call(CustomersTableSeeder::class);
+            $this->call(SupliersTableSeeder::class);
         }
     }
 }
