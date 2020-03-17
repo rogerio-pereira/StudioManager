@@ -19,7 +19,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Suplier::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->company,
         'email' => $faker->safeEmail,
         'phone' => $faker->tollFreePhoneNumber,
         'address' => $faker->streetAddress,
