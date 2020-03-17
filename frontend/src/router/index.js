@@ -14,6 +14,11 @@ import SuplierList from '../views/Supliers/List.vue'
 import SuplierNew from '../views/Supliers/New.vue'
 import SuplierEdit from '../views/Supliers/Edit.vue'
 
+import TeamIndex from '../views/Team/Index.vue'
+import TeamList from '../views/Team/List.vue'
+import TeamNew from '../views/Team/New.vue'
+import TeamEdit from '../views/Team/Edit.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -43,6 +48,15 @@ const routes = [
       {path: '', component: SuplierList, props: true, name: 'supliers.index'},
       {path: 'new', component: SuplierNew, props: true, name: 'supliers.new'},
       {path: 'edit/:id', component: SuplierEdit, props: true, name: 'supliers.edit'},
+    ]
+  },
+  {
+    path: '/team',
+    component: TeamIndex,
+    children: [
+      {path: '', component: TeamList, props: true, name: 'team.index'},
+      {path: 'new', component: TeamNew, props: true, name: 'team.new'},
+      {path: 'edit/:id', component: TeamEdit, props: true, name: 'team.edit'},
     ]
   },
 ]
