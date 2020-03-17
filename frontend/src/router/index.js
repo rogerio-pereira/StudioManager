@@ -19,6 +19,11 @@ import TeamList from '../views/Team/List.vue'
 import TeamNew from '../views/Team/New.vue'
 import TeamEdit from '../views/Team/Edit.vue'
 
+import ProductIndex from '../views/Products/Index.vue'
+import ProductList from '../views/Products/List.vue'
+import ProductNew from '../views/Products/New.vue'
+import ProductEdit from '../views/Products/Edit.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -57,6 +62,15 @@ const routes = [
       {path: '', component: TeamList, props: true, name: 'team.index'},
       {path: 'new', component: TeamNew, props: true, name: 'team.new'},
       {path: 'edit/:id', component: TeamEdit, props: true, name: 'team.edit'},
+    ]
+  },
+  {
+    path: '/products',
+    component: ProductIndex,
+    children: [
+      {path: '', component: ProductList, props: true, name: 'products.index'},
+      {path: 'new', component: ProductNew, props: true, name: 'products.new'},
+      {path: 'edit/:id', component: ProductEdit, props: true, name: 'products.edit'},
     ]
   },
 ]

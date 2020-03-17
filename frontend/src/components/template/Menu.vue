@@ -41,6 +41,16 @@
                                     Team
                                 </router-link>
                             </li>
+                            <li class="nav-item active">
+                                <router-link 
+                                    to='/products' 
+                                    class='nav-link' 
+                                    data-toggle="collapse" 
+                                    data-target=".navbar-collapse.show"
+                                >
+                                    Products &amp; Services
+                                </router-link>
+                            </li>
 
                             <li class="nav-item">
                                 <a href='/' @click.prevent.stop='logout()' class='nav-link'>Logout</a>

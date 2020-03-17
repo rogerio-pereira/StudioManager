@@ -11,4 +11,9 @@ class Product extends Model
         'value',
         'cost',
     ];
+
+    protected $casts = [
+        'value' => 'decimal:2',
+        'cost' => 'decimal:2',
+    ];
 }
