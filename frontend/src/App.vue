@@ -45,9 +45,9 @@
     }
 
     body {
-        background: #ece9e6; /* fallback for old browsers */
-        background: -webkit-linear-gradient(to top, #ece9e6, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to top, #ece9e6, #ffffff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: #D9D2E6;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom, #E9E4F0, #D9D2E6);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #E9E4F0, #D9D2E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
         overflow-x: hidden;
         font-size: 1.4rem !important;
@@ -64,5 +64,15 @@
 
     div.content{
         min-height: 500px;
+    }
+
+    .btn-primary {
+        background-color: #233A54 !important;
+        border-color: #233A54 !important;
+    }
+
+    .btn-primary:hover {
+        background-color: #141F31 !important;
+        border-color: #141F31 !important;
     }
 </style>
