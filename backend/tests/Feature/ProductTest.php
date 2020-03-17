@@ -143,6 +143,34 @@ class ProductTest extends TestCase
     /**
      * @test
      */
+    public function aUserCantCreateAProductWithValueLessThanZero()
+    {
+        $this->actingAs(factory(User::class)->create(), 'api');
+        $data = [
+            'name' => 'Product Name',
+            'value' => -50,
+        ];
+        $request = $this->post('/api/products', $data);
+
+        $request->assertStatus(422)
+            ->assertJson([
+                'errors' => [
+                    'value' => [
+                        'The value must be at least 1.'
+                    ],
+                ]
+            ]);
+        
+        $data['value'] = 50;
+    
+        $data['email'] = 'product@product';
+        $request = $this->post('/api/products', $data);
+        $request->assertCreated();
+    }
+
+    /**
+     * @test
+     */
     public function aUserCantCreateAProductWithWrongCost()
     {
         $this->actingAs(factory(User::class)->create(), 'api');
@@ -163,6 +191,35 @@ class ProductTest extends TestCase
             ]);
 
         $data['cost'] = 10;
+    
+        $data['email'] = 'product@product';
+        $request = $this->post('/api/products', $data);
+        $request->assertCreated();
+    }
+
+    /**
+     * @test
+     */
+    public function aUserCantCreateAProductWithCostLessThanZero()
+    {
+        $this->actingAs(factory(User::class)->create(), 'api');
+        $data = [
+            'name' => 'Product Name',
+            'value' => 50,
+            'cost' => -50,
+        ];
+        $request = $this->post('/api/products', $data);
+
+        $request->assertStatus(422)
+            ->assertJson([
+                'errors' => [
+                    'cost' => [
+                        'The cost must be at least 1.'
+                    ],
+                ]
+            ]);
+        
+        $data['cost'] = 50;
     
         $data['email'] = 'product@product';
         $request = $this->post('/api/products', $data);
