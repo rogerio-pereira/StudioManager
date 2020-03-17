@@ -21,6 +21,16 @@
                                     Customers
                                 </router-link>
                             </li>
+                            <li class="nav-item active">
+                                <router-link 
+                                    to='/supliers' 
+                                    class='nav-link' 
+                                    data-toggle="collapse" 
+                                    data-target=".navbar-collapse.show"
+                                >
+                                    Supliers
+                                </router-link>
+                            </li>
 
                             <li class="nav-item">
                                 <a href='/' @click.prevent.stop='logout()' class='nav-link'>Logout</a>
