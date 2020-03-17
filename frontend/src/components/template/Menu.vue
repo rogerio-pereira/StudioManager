@@ -11,16 +11,16 @@
                 <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode='out-in'>
                     <div class="collapse navbar-collapse" id="navbar" v-if='this.$store.state.PassportApiToken.token'>
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                            <!-- <li class="nav-item active">
+                            <li class="nav-item active">
                                 <router-link 
-                                    to='/accounts' 
+                                    to='/customers' 
                                     class='nav-link' 
                                     data-toggle="collapse" 
                                     data-target=".navbar-collapse.show"
                                 >
-                                    Accounts
+                                    Customers
                                 </router-link>
-                            </li> -->
+                            </li>
 
                             <li class="nav-item">
                                 <a href='/' @click.prevent.stop='logout()' class='nav-link'>Logout</a>
