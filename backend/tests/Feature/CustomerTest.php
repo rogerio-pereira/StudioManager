@@ -15,7 +15,7 @@ class CustomerTest extends TestCase
     /**
      * @test
      */
-    public function aUserCanGetAllUsersSortedByNameAsc()
+    public function aUserCanGetAllCustomerSortedByNameAsc()
     {
         $this->actingAs(factory(User::class)->create(), 'api');
         factory(Customer::class)->create([
@@ -65,6 +65,29 @@ class CustomerTest extends TestCase
                     'state' => 'ST',
                     'zipcode' => '88888',
                 ]
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function aUserCanGetACustomer()
+    {
+        $this->actingAs(factory(User::class)->create(), 'api');
+        $customer = factory(Customer::class)->create();
+
+        $response = $this->get('/api/customers/1');
+        $response->assertOk()
+            ->assertJson([
+                'id' => 1,
+                'name' => $customer->name,
+                'email' => $customer->email,
+                'phone' => $customer->phone,
+                'address' => $customer->address,
+                'address2' => $customer->address2,
+                'city' => $customer->city,
+                'state' => $customer->state,
+                'zipcode' => $customer->zipcode,
             ]);
     }
 
