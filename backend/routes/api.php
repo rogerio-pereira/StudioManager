@@ -26,4 +26,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('supliers', 'SuplierController');
     Route::resource('team', 'TeamController');
     Route::resource('products', 'ProductsController');
+    Route::resource('events', 'EventsController');
 });
