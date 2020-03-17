@@ -25,4 +25,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('customers', 'CustomerController');
     Route::resource('supliers', 'SuplierController');
     Route::resource('team', 'TeamController');
+    Route::resource('products', 'ProductsController');
 });
