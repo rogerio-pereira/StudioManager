@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\Customer;
+use App\Model\Suplier;
 use Illuminate\Database\Seeder;
 
 class SupliersTableSeeder extends Seeder
@@ -12,6 +12,6 @@ class SupliersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Customer::class, 10)->create();
+        factory(Suplier::class, 10)->create();
     }
 }
