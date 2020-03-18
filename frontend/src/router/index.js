@@ -24,6 +24,11 @@ import ProductList from '../views/Products/List.vue'
 import ProductNew from '../views/Products/New.vue'
 import ProductEdit from '../views/Products/Edit.vue'
 
+import EventIndex from '../views/Events/Index.vue'
+import EventList from '../views/Events/List.vue'
+import EventNew from '../views/Events/New.vue'
+import EventEdit from '../views/Events/Edit.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -71,6 +76,15 @@ const routes = [
       {path: '', component: ProductList, props: true, name: 'products.index'},
       {path: 'new', component: ProductNew, props: true, name: 'products.new'},
       {path: 'edit/:id', component: ProductEdit, props: true, name: 'products.edit'},
+    ]
+  },
+  {
+    path: '/events',
+    component: EventIndex,
+    children: [
+      {path: '', component: EventList, props: true, name: 'events.index'},
+      {path: 'new', component: EventNew, props: true, name: 'events.new'},
+      {path: 'edit/:id', component: EventEdit, props: true, name: 'events.edit'},
     ]
   },
 ]

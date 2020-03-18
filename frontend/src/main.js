@@ -7,6 +7,7 @@ import axios from './plugins/axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import 'vue-datetime/dist/vue-datetime.css'
 
 Vue.config.productionTip = false
 
