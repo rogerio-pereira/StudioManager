@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
             $table->dateTime('date');
+            $table->string('place');
             $table->timestamps();
         });
     }

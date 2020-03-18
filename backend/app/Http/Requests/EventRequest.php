@@ -29,6 +29,7 @@ class EventRequest extends FormRequest
             'customer_id' => 'required|numeric|exists:customers,id',
             'date' => 'required|date|after_or_equal:today',
             'team' => 'required|array|exists:team,id',
+            'place' => 'required',
         ];
     }
     

@@ -9,6 +9,7 @@ class Event extends Model
     protected $fillable = [
         'customer_id',
         'date',
+        'place',
     ];
 
     protected $dates = [

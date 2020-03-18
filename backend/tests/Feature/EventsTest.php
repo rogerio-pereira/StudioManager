@@ -31,6 +31,7 @@ class EventsTest extends TestCase
         factory(Event::class)->create([
             'customer_id' => 1,
             'date' => $nextWeek->toDateTimeString(),
+            'place' => 'Place 1 Address'
         ]);
         factory(EventTeam::class)->create([
             'event_id' => 1,
@@ -40,6 +41,7 @@ class EventsTest extends TestCase
         factory(Event::class)->create([
             'customer_id' => 1,
             'date' => $today->toDateTimeString(),
+            'place' => 'Place 2 Address'
         ]);
         factory(EventTeam::class)->create([
             'event_id' => 2,
@@ -57,6 +59,7 @@ class EventsTest extends TestCase
                 [
                     'id' => 1,
                     'date' => $today->toDateTimeString(),
+                    'place' => 'Place 1 Address',
                     'customer' => [
                         'id' => 1,
                         'name' => $customer->name
@@ -71,6 +74,7 @@ class EventsTest extends TestCase
                 [
                     'id' => 2,
                     'date' => $nextWeek->toDateTimeString(),
+                    'place' => 'Place 2 Address',
                     'customer' => [
                         'id' => 1,
                         'name' => $customer->name
@@ -103,6 +107,7 @@ class EventsTest extends TestCase
         factory(Event::class)->create([
             'customer_id' => 1,
             'date' => $today->toDateTimeString(),
+            'place' => 'Place Address',
         ]);
         factory(EventTeam::class)->create([
             'event_id' => 1,
@@ -118,6 +123,7 @@ class EventsTest extends TestCase
             ->assertJson([
                 'id' => 1,
                 'date' => $today->toDateTimeString(),
+                'place' => 'Place Address',
                 'customer' => [
                     'id' => 1,
                     'name' => $customer->name
@@ -149,6 +155,7 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 1,
             'date' => $date->toDateTimeString(),
+            'place' => 'Place Address',
             'team' => [1, 2]
         ];
 
@@ -157,6 +164,7 @@ class EventsTest extends TestCase
             ->assertJson([
                 'id' => 1,
                 'date' => $date->toDateTimeString(),
+                'place' => 'Place Address',
                 'customer' => [
                     'id' => 1,
                     'name' => $customer->name
@@ -189,6 +197,7 @@ class EventsTest extends TestCase
             // 'customer_id' => 1,
             // 'date' => $date->toDateTimeString(),
             // 'team' => [1, 2]
+            // 'place' => 'Place Address',
         ];
 
         $response = $this->post('/api/events', $data);
@@ -203,6 +212,9 @@ class EventsTest extends TestCase
                     ],
                     'team' => [
                         'The team field is required.'
+                    ],
+                    'place' => [
+                        'The place field is required.'
                     ],
                 ]
             ]);
@@ -222,7 +234,8 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 'customer',
             'date' => $date->toDateTimeString(),
-            'team' => [1, 2]
+            'team' => [1, 2],
+            'place' => 'Place Address',
         ];
 
         $response = $this->post('/api/events', $data);
@@ -250,7 +263,8 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 1,
             'date' => $date->toDateTimeString(),
-            'team' => [1, 2]
+            'team' => [1, 2],
+            'place' => 'Place Address',
         ];
 
         $response = $this->post('/api/events', $data);
@@ -278,7 +292,8 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 1,
             'date' => 'date',
-            'team' => [1, 2]
+            'team' => [1, 2],
+            'place' => 'Place Address',
         ];
 
         $response = $this->post('/api/events', $data);
@@ -306,7 +321,8 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 1,
             'date' => $date->toDateTimeString(),
-            'team' => [1, 2]
+            'team' => [1, 2],
+            'place' => 'Place Address',
         ];
 
         $response = $this->post('/api/events', $data);
@@ -342,7 +358,8 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 1,
             'date' => $date,
-            'team' => 1
+            'team' => 1,
+            'place' => 'Place Address',
         ];
 
         $response = $this->post('/api/events', $data);
@@ -370,7 +387,8 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 1,
             'date' => $date,
-            'team' => [1, 2, 3]
+            'team' => [1, 2, 3],
+            'place' => 'Place Address',
         ];
 
         $response = $this->post('/api/events', $data);
@@ -420,6 +438,7 @@ class EventsTest extends TestCase
                 [
                     'id' => 1,
                     'date' => Carbon::now()->addWeek()->toDateTimeString(),
+                    'place' => $event->place,
                     'customer' => [
                         'id' => 1,
                         'name' => $customer1->name
@@ -440,7 +459,8 @@ class EventsTest extends TestCase
         $data = [
             'customer_id' => 2,
             'date' => Carbon::now()->addMonth()->toDateTimeString(),
-            'team' => [3, 4]
+            'place' => 'Place Address',
+            'team' => [3, 4],
         ];
 
         $request = $this->put('/api/events/1', $data);
@@ -448,6 +468,7 @@ class EventsTest extends TestCase
             ->assertJson([
                 'id' => 1,
                 'date' => Carbon::now()->addMonth()->toDateTimeString(),
+                'place' => 'Place Address',
                 'customer' => [
                     'id' => 2,
                     'name' => $customer2->name
@@ -472,6 +493,7 @@ class EventsTest extends TestCase
                 [
                     'id' => 1,
                     'date' => Carbon::now()->addMonth()->toDateTimeString(),
+                    'place' => 'Place Address',
                     'customer' => [
                         'id' => 2,
                         'name' => $customer2->name
@@ -518,6 +540,7 @@ class EventsTest extends TestCase
                 [
                     'id' => 1,
                     'date' => $event->date->toDateTimeString(),
+                    'place' => $event->place,
                     'customer' => [
                         'id' => 1,
                         'name' => $customer1->name

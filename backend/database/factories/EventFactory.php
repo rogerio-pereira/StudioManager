@@ -21,5 +21,6 @@ $factory->define(Event::class, function (Faker $faker) {
     return [
         'customer_id' => rand(1, 10),
         'date' => $faker->dateTimeBetween('-5 days', '+5 days', null),
+        'place' => $faker->words(3, true)
     ];
 });
