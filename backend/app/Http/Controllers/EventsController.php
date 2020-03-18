@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Event;
 use Illuminate\Http\Request;
+use App\Http\Requests\EventRequest;
 
 class EventsController extends Controller
 {
@@ -33,9 +34,17 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $event = Event::create($data);
+        $event->team()->sync($data['team']);
+
+        //Get Event with customer and team to return
+        $event = $event->with('customer')->with('team')->get()->first();
+
+        return response()->json($event, 201);
     }
 
     /**
@@ -67,9 +76,15 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EventRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $event = Event::find($id);
+        $event->update($data);
+        $event->team()->sync($data['team']);
+
+        return $event->with('customer')->with('team')->get()->first();
     }
 
     /**
@@ -80,6 +95,8 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Event::find($id)->delete();
+
+        return [];
     }
 }

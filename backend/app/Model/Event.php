@@ -11,6 +11,12 @@ class Event extends Model
         'date',
     ];
 
+    protected $dates = [
+        'date',
+        'created_at',
+        'updated_at',
+    ];
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

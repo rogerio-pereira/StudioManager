@@ -18,6 +18,11 @@ class CreateEventTeamsTable extends Migration
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('member_id');
             $table->timestamps();
+
+            $table->foreign('event_id')
+                ->references('id')
+                ->on('events')
+                ->onDelete('cascade');
         });
     }
 
