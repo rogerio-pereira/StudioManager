@@ -27,7 +27,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('team', 'TeamController');
     Route::resource('products', 'ProductsController');
     Route::resource('events', 'EventsController');
+    
     Route::resource('sales', 'SalesController');
     Route::get('payments/{id}', 'PaymentController@index')->name('payments.index');
     Route::put('/payment/{id}/pay', 'PaymentController@pay')->name('payments.pay');
 });
+
+Route::get('/schedule', 'ScheduleController@index');
+Route::get('/schedule/{start_date}', 'ScheduleController@index');
+Route::get('/schedule/{start_date}/{end_date}', 'ScheduleController@index');
