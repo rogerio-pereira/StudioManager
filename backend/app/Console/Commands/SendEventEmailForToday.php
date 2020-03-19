@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 use App\Mail\CustomerEventToday;
 use Illuminate\Support\Facades\Mail;
 
-class SendEmailForToday extends Command
+class SendEventEmailForToday extends Command
 {
     /**
      * The name and signature of the console command.
