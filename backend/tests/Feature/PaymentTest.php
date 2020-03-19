@@ -138,8 +138,6 @@ class PaymentTest extends TestCase
             ->assertJson([]);
     }
 
-
-
     /**
      * @test
      */
@@ -217,6 +215,111 @@ class PaymentTest extends TestCase
                     'amount' => $product1->value / 2,
                     'due_at' => Carbon::now()->addWeek()->toDateString(),
                     'payed' => false
+                ],
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function aUserCanGetPaymentsForToday()
+    {
+        $this->actingAs(factory(User::class)->create(), 'api');
+        $customer1 = factory(Customer::class)->create();
+        $customer2 = factory(Customer::class)->create();
+        $product1 = factory(Product::class)->create();
+
+        $valueSale1 = round($product1->value/2, 2);
+        $valueSale2 = round(($product1->value - 30)/3, 2);
+
+        $sale1 = factory(Sale::class)->create([
+            'customer_id' => 1,
+            'value' => $product1->value,
+            'discount' => 0,
+            'installments' => 2,
+            'period' => 'Weekly',
+            'start_date' => Carbon::now()->toDateString(),
+        ]);
+        factory(SaleProduct::class)->create([
+            'sale_id' => 1,
+            'product_id' => 1,
+        ]);
+        factory(Payment::class)->create([
+            'sale_id' => 1,
+            'amount' =>  $valueSale1,
+            'due_at' => Carbon::now()->toDateString(),
+            'payed' => false
+        ]);
+        factory(Payment::class)->create([
+            'sale_id' => 1,
+            'amount' =>  $valueSale1,
+            'due_at' => Carbon::now()->addWeek()->toDateString(),
+            'payed' => false
+        ]);
+
+        $sale2 = factory(Sale::class)->create([
+            'customer_id' => 2,
+            'value' => $product1->value,
+            'discount' => 30,
+            'installments' => 3,
+            'period' => 'Weekly',
+            'start_date' => Carbon::now()->toDateString(),
+        ]);
+        factory(SaleProduct::class)->create([
+            'sale_id' => 1,
+            'product_id' => 1,
+        ]);
+        factory(Payment::class)->create([
+            'sale_id' => 2,
+            'amount' =>  $valueSale2,
+            'due_at' => Carbon::now()->toDateString(),
+            'payed' => false
+        ]);
+        factory(Payment::class)->create([
+            'sale_id' => 2,
+            'amount' =>  $valueSale2,
+            'due_at' => Carbon::now()->addWeek()->toDateString(),
+            'payed' => false
+        ]);
+        factory(Payment::class)->create([
+            'sale_id' => 2,
+            'amount' =>  $valueSale2,
+            'due_at' => Carbon::now()->addWeek(2)->toDateString(),
+            'payed' => false
+        ]);
+
+
+
+        //GET
+        $response = $this->get('/api/payments/today');
+        $response->assertOk()
+            ->assertJsonCount(2)
+            ->assertJson([
+                [
+                    'id' => 1,
+                    'sale_id' => 1,
+                    'amount' =>  $valueSale1,
+                    'due_at' => Carbon::now()->toDateString(),
+                    'payed' => false,
+                    'sale' => [
+                        'customer' => [
+                            'id' => 1,
+                            'name' => $customer1->name,
+                        ]
+                    ]
+                ],
+                [
+                    'id' => 3,
+                    'sale_id' => 2,
+                    'amount' =>  $valueSale2,
+                    'due_at' => Carbon::now()->toDateString(),
+                    'payed' => false,
+                    'sale' => [
+                        'customer' => [
+                            'id' => 2,
+                            'name' => $customer2->name,
+                        ]
+                    ]
                 ],
             ]);
     }

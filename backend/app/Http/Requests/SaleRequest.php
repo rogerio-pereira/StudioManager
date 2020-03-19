@@ -32,7 +32,7 @@ class SaleRequest extends FormRequest
             'installments' => 'required|numeric',
             'products' => 'required|array|exists:products,id',
             'period' => 'required|in:Weekly,Biweekly,Monthly',
-            'start_date' => 'required|date|after:today',
+            'start_date' => 'required|date|after_or_equal:today',
         ];
     }
     

@@ -6,6 +6,7 @@ use App\Model\Sale;
 use App\Model\Payment;
 use Illuminate\Http\Request;
 use App\Http\Requests\PayRequest;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -22,5 +23,12 @@ class PaymentController extends Controller
         $payement->update($data);
 
         return $payement;
+    }
+
+    public function paymentsToday()
+    {
+        return Payment::whereDate('due_at', Carbon::today()->toDateString())
+                ->with('sale.customer')
+                ->get(); 
     }
 }

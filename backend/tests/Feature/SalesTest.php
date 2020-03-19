@@ -487,7 +487,7 @@ class SalesTest extends TestCase
             ->assertJson([
                 'errors' => [
                     'start_date' => [
-                        'The start date must be a date after today.'
+                        'The start date must be a date after or equal to today.'
                     ],
                 ]
             ]);
@@ -631,7 +631,7 @@ class SalesTest extends TestCase
     /**
      * @test
      */
-    public function aUserCantCreateASaleWithDateFieldToday()
+    public function aUserCanCreateASaleWithDateFieldToday()
     {
         $this->actingAs(factory(User::class)->create(), 'api');
         $customer1 = factory(Customer::class)->create();
@@ -648,14 +648,7 @@ class SalesTest extends TestCase
         ];
 
         $request = $this->post('/api/sales', $data);
-        $request->assertStatus(422)
-            ->assertJson([
-                'errors' => [
-                    'start_date' => [
-                        'The start date must be a date after today.'
-                    ],
-                ]
-            ]);
+        $request->assertCreated();
     }
 
     /**
