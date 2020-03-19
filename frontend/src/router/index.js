@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 
-import ScheduleList from '../views/Schedule/List.vue'
+import ScheduleIndex from '../views/Schedule/Index.vue'
 
 import CustomerIndex from '../views/Customers/Index.vue'
 import CustomerList from '../views/Customers/List.vue'
@@ -52,7 +52,7 @@ const routes = [
   {
     path: '/schedule',
     name: 'schedule',
-    component: ScheduleList
+    component: ScheduleIndex
   },
   {
     path: '/customers',

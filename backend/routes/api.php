@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/schedule/{start_date}/{end_date}', 'ScheduleController@index');
     
     Route::resource('sales', 'SalesController');
+    Route::get('payments/today', 'PaymentController@paymentsToday')->name('payments.today');
+    Route::get('payments/{id}', 'PaymentController@index')->name('payments.index');
+    Route::put('/payment/{id}/pay', 'PaymentController@pay')->name('payments.pay');
 });
-Route::get('payments/today', 'PaymentController@paymentsToday')->name('payments.today');
-Route::get('payments/{id}', 'PaymentController@index')->name('payments.index');
-Route::put('/payment/{id}/pay', 'PaymentController@pay')->name('payments.pay');
