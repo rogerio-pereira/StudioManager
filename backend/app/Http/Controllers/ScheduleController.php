@@ -14,16 +14,19 @@ class ScheduleController extends Controller
             return Event::whereDate('date', Carbon::today()->toDateString())
                         ->with('customer')
                         ->with('team')
+                        ->orderBy('date', 'asc')
                         ->get();
         }
         else if(!isset($end_date)) {
             return Event::whereDate('date', $start_date)
                         ->with('customer')
                         ->with('team')
+                        ->orderBy('date', 'asc')
                         ->get();
         }
         else
-            return Event::whereBetween('date', [$start_date, $end_date])
+            return Event::whereDate('date', '>=', $start_date)
+                    ->whereDate('date', '<=', $end_date)
                     ->with('customer')
                     ->with('team')
                     ->orderBy('date', 'asc')

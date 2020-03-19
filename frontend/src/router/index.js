@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 
+import ScheduleList from '../views/Schedule/List.vue'
+
 import CustomerIndex from '../views/Customers/Index.vue'
 import CustomerList from '../views/Customers/List.vue'
 import CustomerNew from '../views/Customers/New.vue'
@@ -46,6 +48,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/schedule',
+    name: 'schedule',
+    component: ScheduleList
   },
   {
     path: '/customers',
