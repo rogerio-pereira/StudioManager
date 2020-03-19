@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use Carbon\Carbon;
 use App\Model\Sale;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -23,5 +24,7 @@ $factory->define(Sale::class, function (Faker $faker) {
         'value' => rand(500, 1000),
         'discount' => rand(100, 200),
         'installments' => 1,
+        'start_date' => Carbon::now()->toDateString(),
+        'period' => 'Weekly',
     ];
 });

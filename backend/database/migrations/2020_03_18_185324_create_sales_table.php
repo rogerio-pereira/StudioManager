@@ -19,6 +19,8 @@ class CreateSalesTable extends Migration
             $table->decimal('value');
             $table->decimal('discount')->default(0);
             $table->integer('installments')->default(1);
+            $table->date('start_date');
+            $table->string('period');
             $table->timestamps();
 
             $table->foreign('customer_id')

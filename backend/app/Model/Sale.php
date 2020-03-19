@@ -11,6 +11,8 @@ class Sale extends Model
         'value',
         'discount',
         'installments',
+        'start_date',
+        'period',
     ];
 
     protected $casts = [

@@ -33,6 +33,8 @@ class SalesTest extends TestCase
             'value' => 200,
             'discount' => 50,
             'installments' => 1,
+            'start_date' => Carbon::now()->addMonth()->toDateString(),
+            'period' => 'Montly',
         ]);
         factory(SaleProduct::class)->create([
             'sale_id' => 1,
@@ -52,6 +54,8 @@ class SalesTest extends TestCase
             'value' => 500,
             'discount' => 0,
             'installments' => 2,
+            'start_date' => Carbon::now()->addMonth()->toDateString(),
+            'period' => 'Montly'
         ]);
         factory(SaleProduct::class)->create([
             'sale_id' => 2,
@@ -83,6 +87,8 @@ class SalesTest extends TestCase
                     'value' => 200,
                     'discount' => 50,
                     'installments' => 1,
+                    'start_date' => Carbon::now()->addMonth()->toDateString(),
+                    'period' => 'Montly',
                     'customer' => [
                         'id' => 1,
                         'name' => $customer1->name
@@ -107,6 +113,8 @@ class SalesTest extends TestCase
                     'value' => 500,
                     'discount' => 0,
                     'installments' => 2,
+                    'start_date' => Carbon::now()->addMonth()->toDateString(),
+                    'period' => 'Montly',
                     'customer' => [
                         'id' => 2,
                         'name' => $customer2->name
@@ -155,6 +163,8 @@ class SalesTest extends TestCase
             'value' => 300,
             'discount' => 50,
             'installments' => 2,
+            'start_date' => Carbon::now()->addMonth()->toDateString(),
+            'period' => 'Montly',
         ]);
         factory(SaleProduct::class)->create([
             'sale_id' => 1,
@@ -184,6 +194,8 @@ class SalesTest extends TestCase
                 'value' => 300,
                 'discount' => 50,
                 'installments' => 2,
+                'start_date' => Carbon::now()->addMonth()->toDateString(),
+                'period' => 'Montly',
                 'customer' => [
                     'id' => 1,
                     'name' => $customer1->name
@@ -244,6 +256,8 @@ class SalesTest extends TestCase
                 'value' => $total,
                 'discount' => 50,
                 'installments' => 2,
+                'period' => 'Weekly',
+                'start_date' => Carbon::now()->addWeek()->toDateString(),
                 'customer' => [
                     'id' => 1,
                     'name' => $customer1->name
@@ -659,6 +673,8 @@ class SalesTest extends TestCase
             'value' => $product1->value,
             'discount' => 50,
             'installments' => 1,
+            'period' => 'Monthly',
+            'start_date' => Carbon::now()->addMonth()->toDateString(),
         ]);
         factory(SaleProduct::class)->create([
             'sale_id' => 1,
@@ -680,6 +696,8 @@ class SalesTest extends TestCase
                     'value' => $sale->value,
                     'discount' => $sale->discount,
                     'installments' => 1,
+                    'start_date' => Carbon::now()->addMonth()->toDateString(),
+                    'period' => 'Monthly',
                     'customer' => [
                         'id' => 1,
                         'name' => $customer1->name
@@ -721,6 +739,8 @@ class SalesTest extends TestCase
                 'value' => $total,
                 'discount' => 30,
                 'installments' => 2,
+                'period' => 'Biweekly',
+                'start_date' => Carbon::now()->addWeek(2)->toDateString(),
                 'customer' => [
                     'id' => 2,
                     'name' => $customer2->name
@@ -760,6 +780,8 @@ class SalesTest extends TestCase
                         'value' => $total,
                         'discount' => 30,
                         'installments' => 2,
+                        'period' => 'Biweekly',
+                        'start_date' => Carbon::now()->addWeek(2)->toDateString(),
                         'customer' => [
                             'id' => 2,
                             'name' => $customer2->name
@@ -805,6 +827,8 @@ class SalesTest extends TestCase
             'value' => $product1->value,
             'discount' => 50,
             'installments' => 1,
+            'period' => 'Monthly',
+            'start_date' => Carbon::now()->addMonth()->toDateString(),
         ]);
         factory(SaleProduct::class)->create([
             'sale_id' => 1,
@@ -826,6 +850,8 @@ class SalesTest extends TestCase
                     'value' => $sale->value,
                     'discount' => $sale->discount,
                     'installments' => 1,
+                    'period' => 'Monthly',
+                    'start_date' => Carbon::now()->addMonth()->toDateString(),
                     'customer' => [
                         'id' => 1,
                         'name' => $customer1->name
