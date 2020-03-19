@@ -29,6 +29,11 @@ import EventList from '../views/Events/List.vue'
 import EventNew from '../views/Events/New.vue'
 import EventEdit from '../views/Events/Edit.vue'
 
+import SalesIndex from '../views/Sales/Index.vue'
+import SalesList from '../views/Sales/List.vue'
+import SalesNew from '../views/Sales/New.vue'
+import SalesEdit from '../views/Sales/Edit.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -85,6 +90,15 @@ const routes = [
       {path: '', component: EventList, props: true, name: 'events.index'},
       {path: 'new', component: EventNew, props: true, name: 'events.new'},
       {path: 'edit/:id', component: EventEdit, props: true, name: 'events.edit'},
+    ]
+  },
+  {
+    path: '/sales',
+    component: SalesIndex,
+    children: [
+      {path: '', component: SalesList, props: true, name: 'sales.index'},
+      {path: 'new', component: SalesNew, props: true, name: 'sales.new'},
+      {path: 'edit/:id', component: SalesEdit, props: true, name: 'sales.edit'},
     ]
   },
 ]

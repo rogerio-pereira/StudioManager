@@ -1,49 +1,49 @@
 <template>
     <div class='card'>
         <div class="card-header">
-            <strong>Edit Event</strong>
+            <strong>Edit Sale</strong>
         </div>
 
         <div class='col-8 offset-2'>
-            <form-event :event='event' :errors='errors' @save='save($event.data)'/>
+            <form-sale :sale='sale' :errors='errors' @save='save($event.data)'/>
         </div>
     </div>
 </template>
 
 <script>
-    import FormEvent from './Form'
+    import FormSale from './Form'
     import { DateTime } from "luxon";
 
     export default {
         components: {
-            FormEvent
+            FormSale
         },
         data() {
             return {
-                event: {},
+                sale: {},
                 errors: {}
             }
         },
         created() {
-            this.$http.get('events/'+this.$route.params.id)
+            this.$http.get('sales/'+this.$route.params.id)
                 .then(response => {
-                    this.event = response.data
+                    this.sale = response.data
                     let arr = []
-                    for(let i=0; i<this.event.team.length; i++) {
-                        arr.push(this.event.team[i].id)
+                    for(let i=0; i<this.sale.products.length; i++) {
+                        arr.push(this.sale.products[i].id)
                     }
-                    this.event.team = arr
-                    this.event.date = DateTime.fromISO(this.event.date.replace(' ', 'T'));
+                    this.sale.products = arr
+                    this.sale.date = DateTime.fromISO(this.sale.date.replace(' ', 'T'));
                 })
                 .catch(error => {
-                    console.log('Error at fetching event\n'+error)
+                    console.log('Error at fetching sale\n'+error)
                 })
         },
         methods: {
             save(data) {
-                this.$http.put('events/'+this.event.id, data)
+                this.$http.put('sales/'+this.sale.id, data)
                     .then(() => {
-                        this.$router.push({ name: 'events.index'})
+                        this.$router.push({ name: 'sales.index'})
                     })
                     .catch(error => {
                         console.log('Error at saving\n'+error)
