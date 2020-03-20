@@ -3,27 +3,27 @@
 namespace App\Console\Commands;
 
 use Carbon\Carbon;
-use App\Model\Event;
 use App\Mail\TeamEventToday;
 use Illuminate\Console\Command;
-use App\Mail\CustomerEventToday;
+use App\Mail\CustomerBillingToday;
+use App\Model\Payment;
 use Illuminate\Support\Facades\Mail;
 
-class SendEventEmailForToday extends Command
+class SendBillingEmailForToday extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'email:sendEventToday';
+    protected $signature = 'email:sendBillingToday';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send email for customer and team for events Today';
+    protected $description = 'Send email for customer for billings Today';
 
     /**
      * Create a new command instance.
@@ -42,14 +42,13 @@ class SendEventEmailForToday extends Command
      */
     public function handle()
     {
-        $events = Event::whereDate('date', Carbon::today()->toDateString())->get();
+        $payments = Payment::whereDate('due_at', Carbon::today()->toDateString())
+                        ->where('payed', false)
+                        ->with('sale.customer')
+                        ->get();
 
-        foreach($events as $event) {
-            Mail::to($event->customer->email)->send(new CustomerEventToday($event));
-
-            foreach($event->team as $member) {
-                Mail::to($member->email)->send(new TeamEventToday($event, $member));
-            }
+        foreach($payments as $payment) {
+            Mail::to($payment->sale->customer->email)->send(new CustomerBillingToday($payment));
         }
     }
 }
