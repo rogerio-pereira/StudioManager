@@ -1,5 +1,5 @@
-# FinancialApp
-Financial App using VueJs and Laravel 6
+# Studio Manager
+Studio Manager using VueJs and Laravel 6
 
 ##Instalation (backend)
 install dependencies
